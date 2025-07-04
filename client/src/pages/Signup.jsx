@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 import axios from '../api/axios';
 
 const Signup = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    username: '',
+    fullName: '',
+    phone: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState(false);
   const [message, setMessage] = useState('');
@@ -48,7 +56,44 @@ const Signup = () => {
       >
         <h2 className="text-2xl font-semibold text-center mb-6">Sign Up</h2>
 
-        {/* Email Input */}
+        {/* Username */}
+        <input
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={form.username}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 border rounded outline-blue-400"
+          required
+        />
+
+        {/* Full Name */}
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          value={form.fullName}
+          onChange={handleChange}
+          className="w-full p-2 mb-4 border rounded outline-blue-400"
+          required
+        />
+
+        {/* Phone Number with Country Code */}
+        <PhoneInput
+          country={'in'}
+          enableSearch
+          value={form.phone}
+          onChange={(value) => setForm((prev) => ({ ...prev, phone: value }))}
+          inputProps={{
+            name: 'phone',
+            required: true,
+            autoFocus: false,
+          }}
+          inputClass="!w-full !p-2 !border !rounded !outline-blue-400 mb-4"
+          containerClass="mb-4"
+        />
+
+        {/* Email */}
         <input
           type="email"
           name="email"
@@ -113,7 +158,6 @@ const Signup = () => {
           </a>
         </p>
 
-        {/* Message */}
         {message && (
           <p className="mt-2 text-sm text-center text-red-500">{message}</p>
         )}
@@ -122,7 +166,7 @@ const Signup = () => {
   );
 };
 
-// ✅ Styled rule item with animation and round indicator
+// ✅ Rule display component
 const RuleItem = ({ isValid, label }) => (
   <li className="flex items-center space-x-2 transition-all duration-300 ease-in-out">
     <div
@@ -130,13 +174,9 @@ const RuleItem = ({ isValid, label }) => (
         isValid ? 'bg-green-500 border-green-500' : 'bg-white border-gray-400'
       } transition-all duration-300`}
     >
-      {isValid && (
-        <span className="text-white text-xs">✓</span>
-      )}
+      {isValid && <span className="text-white text-xs">✓</span>}
     </div>
-    <span
-      className={`${isValid ? 'text-green-600' : 'text-gray-600'} transition-all duration-300`}
-    >
+    <span className={`${isValid ? 'text-green-600' : 'text-gray-600'} transition-all duration-300`}>
       {label}
     </span>
   </li>
