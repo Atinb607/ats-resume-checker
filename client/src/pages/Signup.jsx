@@ -89,7 +89,7 @@ const Signup = () => {
             required: true,
             autoFocus: false,
           }}
-          inputClass="!w-full !p-2 !border !rounded !outline-blue-400 mb-4"
+          inputClass="!w-full !p-2 !pl-12 !border !rounded !outline-blue-400 mb-4"
           containerClass="mb-4"
         />
 
