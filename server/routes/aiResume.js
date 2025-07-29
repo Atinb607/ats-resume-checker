@@ -52,55 +52,78 @@ async function extractText(filePath, ext) {
 
 // Enhanced Gemini prompt for comprehensive analysis
 function buildPrompt(resumeText) {
-  return `You are an expert resume analyst and career consultant with 15+ years of experience in talent acquisition and ATS optimization.
+  return `You are an expert resume analyst and career consultant with 15+ years of experience in talent acquisition, HR strategy, and ATS optimization.
 
-Analyze the following resume comprehensively and provide detailed, actionable feedback in JSON format ONLY.
+Your task is to critically analyze the following resume and return **a detailed, structured JSON response** with **actionable feedback written in numbered points**.
 
-Resume Content:
+====================
+📄 Resume Content:
 """
 ${resumeText}
 """
+====================
 
-Provide a thorough analysis in the following JSON format. Be specific, detailed, and actionable in your feedback. Return ONLY valid JSON without any additional text or formatting:
+First, detect whether this resume belongs to:
+- A **Fresher** (0–1 years of experience)
+- An **Experienced Professional** (2+ years of experience)
+Tailor your analysis and suggestions accordingly based on the candidate’s level.
+
+📢 **Output Format**
+Return only a **valid, clean JSON** (no extra text or markdown). Every suggestion inside each section must be written as **numbered bullet points**. Follow this exact structure:
 
 {
-  "score": [number between 0 and 100 based on overall resume quality],
-  "summarySuggestions": "Detailed suggestions for improving the professional summary/objective section. Be specific about what to add, remove, or modify.",
+  "candidateType": "Fresher" | "Experienced",
+  "score": [number from 0 to 100 based on resume quality],
+  "summarySuggestions": [
+    "1. Point-based, clear feedback on the professional summary or objective.",
+    "2. Suggestions tailored to fresher or experienced profile."
+  ],
   "missingSections": [
-    "List specific resume sections that are missing or weak",
-    "Examples: Professional Summary, Core Competencies, Certifications, Projects, Volunteer Experience, etc."
+    "1. Mention sections that are missing or underdeveloped.",
+    "2. Example: Certifications, Projects, Internships, etc."
   ],
   "keywordSuggestions": [
-    "Specific industry keywords and technical skills to add",
-    "Action verbs that would strengthen descriptions", 
-    "Industry-specific terminology that's missing",
-    "Soft skills that should be highlighted"
+    "1. Important keywords or tools missing for this candidate's industry.",
+    "2. Action verbs to strengthen impact.",
+    "3. Soft skills or industry-specific terms that enhance ATS match."
   ],
   "formattingIssues": [
-    "Specific formatting problems identified",
-    "Inconsistencies in style, fonts, or structure",
-    "ATS compatibility issues",
-    "Readability improvements needed"
+    "1. Issues with font, layout, alignment, or ATS compatibility.",
+    "2. Suggestions for improving structure and readability."
   ],
   "contentImprovements": [
-    "Specific suggestions for improving work experience descriptions",
-    "Ways to better quantify achievements",
-    "Skills that need more context or examples",
-    "Areas where impact could be better demonstrated"
+    "1. Ways to improve descriptions, quantify achievements, or rewrite vague lines.",
+    "2. Areas where content lacks clarity or depth."
   ],
   "strengthsIdentified": [
-    "Strong points in the current resume",
-    "Well-written sections or descriptions",
-    "Good use of keywords or formatting",
-    "Impressive achievements or experiences"
+    "1. Strong areas of the resume — content, design, or keyword usage.",
+    "2. Accomplishments or experience that stand out."
   ],
-  "industryAlignment": "Assessment of how well the resume aligns with current industry standards and trends",
-  "atsCompatibility": "Detailed assessment of ATS compatibility including specific issues and improvements",
-  "competitiveAdvantage": "Suggestions for making this resume stand out from competitors",
-  "finalTips": "3-5 specific, actionable recommendations for immediate improvement, prioritized by impact"
+  "industryAlignment": [
+    "1. Does the resume meet current expectations for the intended role or industry?",
+    "2. Recommendations to better align with trends."
+  ],
+  "atsCompatibility": [
+    "1. Evaluate formatting, keyword usage, file structure for ATS parsing.",
+    "2. Fixes to improve ATS readability."
+  ],
+  "competitiveAdvantage": [
+    "1. Suggestions to differentiate from other applicants.",
+    "2. Unique elements or branding strategies."
+  ],
+  "finalTips": [
+    "1. Most important tip for immediate improvement.",
+    "2. Second most important improvement.",
+    "3. Continue up to 5 key changes, in priority order."
+  ]
 }
 
-Be thorough, specific, and constructive in your analysis. Focus on actionable improvements that will have the highest impact on the candidate's job search success.`;
+📌 Notes:
+- Use **numbered points inside all sections** (e.g., “1. …”, “2. …”).
+- If a section has no issues, still respond with "No major issues found." in a numbered format.
+- Tailor tone and suggestions based on whether the user is a **fresher or experienced**.
+
+Focus on high-impact, job-market-relevant feedback. Return **JSON only** — no explanations, markdown, or formatting outside JSON.`;
 }
 
 // POST /api/ai/analyze - Enhanced comprehensive analysis
