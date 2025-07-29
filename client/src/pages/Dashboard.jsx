@@ -269,7 +269,7 @@ const Dashboard = () => {
 
         {/* Footer */}
         <div className="text-center mt-12 text-gray-500 text-xs animate-fade-in-delay">
-          <p>© 2024 Resume Forge. All rights reserved.</p>
+          <p>© 2025 Resume Forge. All rights reserved.</p>
         </div>
       </div>
 
