@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "vite": "^7.0.6",
-    "build": "vite build"
+    "vite": "^7.0.6"
   }
 }
