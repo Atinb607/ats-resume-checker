@@ -159,7 +159,7 @@ const Dashboard = () => {
               <div className="mb-8">
                 <h2 className="text-2xl font-bold text-white mb-2">Upload Your Resume</h2>
                 <p className="text-gray-400">
-                  Only .docx and .pdf files are supported for analysis.
+                  Only .docx files are supported for analysis.
                 </p>
               </div>
 

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Eye, EyeOff, FileText, Sparkles } from "lucide-react"
@@ -133,14 +131,15 @@ const Login = () => {
           </button>
 
           {/* Sign Up Link */}
-          <p className="mt-6 text-sm text-center text-gray-400">
+          <p className="mt-6 text-sm text-center text-blue-200">
             Don't have an account?{" "}
-            <a
-              href="/signup"
-              className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors duration-200 font-medium"
+            <button
+              type="button"
+              onClick={() => navigate('/signup')}
+              className="text-blue-400 hover:text-blue-300 underline underline-offset-2 transition-colors duration-200 font-medium bg-transparent border-none cursor-pointer"
             >
               Create Account
-            </a>
+            </button>
           </p>
 
           {/* Message */}
