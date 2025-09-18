@@ -1,59 +1,33 @@
-import React, { useState, useRef } from "react";
-import ResumeForm from "../components/ResumeForm";
-import TemplatePicker from "../components/TemplatePicker";
-import Modern from "../components/templates/Modern";
-import Elegant from "../components/templates/Elegant";
-import Compact from "../components/templates/Compact";
-import Creative from "../components/templates/Creative";
-import Classic from "../components/templates/Classic";
-import html2pdf from "html2pdf.js";
-
-const templateComponents = {
-  modern: Modern,
-  elegant: Elegant,
-  compact: Compact,
-  creative: Creative,
-  classic: Classic,
-};
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ResumeGenerator = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({});
-  const [selectedTemplate, setSelectedTemplate] = useState("modern");
-  const resumeRef = useRef();
-
-  const generatePDF = () => {
-    html2pdf().from(resumeRef.current).save("My_Resume.pdf");
-  };
-
-  const Template = templateComponents[selectedTemplate];
+  const navigate = useNavigate();
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      {step === 1 && (
-        <ResumeForm formData={formData} setFormData={setFormData} nextStep={() => setStep(2)} />
-      )}
-      {step === 2 && (
-        <TemplatePicker
-          selected={selectedTemplate}
-          setSelected={setSelectedTemplate}
-          nextStep={() => setStep(3)}
-        />
-      )}
-      {step === 3 && (
-        <div>
-          <h2 className="text-xl font-bold mb-4">Your Resume Preview</h2>
-          <div ref={resumeRef} className="bg-white p-8 shadow-lg">
-            <Template data={formData} />
-          </div>
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      <div className="bg-gray-800 rounded-lg p-8 max-w-md w-full text-center border border-blue-500/20">
+        <h1 className="text-2xl font-bold text-white mb-4">Resume Generator</h1>
+        <p className="text-gray-300 mb-6">
+          This feature is coming soon! We're working on an amazing resume generator.
+        </p>
+        
+        <div className="space-y-3">
           <button
-            onClick={generatePDF}
-            className="mt-4 bg-blue-600 text-white px-6 py-2 rounded"
+            onClick={() => navigate('/dashboard')}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
           >
-            Download PDF
+            Go to Dashboard
+          </button>
+          
+          <button
+            onClick={() => navigate('/')}
+            className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors"
+          >
+            Go Home
           </button>
         </div>
-      )}
+      </div>
     </div>
   );
 };

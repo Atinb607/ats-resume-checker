@@ -5,28 +5,28 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": ["resume", "ats", "ai", "job-search"],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "ATS Resume Checker Backend API",
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.56.0",
     "@google/generative-ai": "^0.17.1",
-    "bcryptjs": "^3.0.2",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^17.0.1",
-    "express": "^5.1.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.2.0",
+    "helmet": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
-    "mammoth": "^1.9.1",
-    "mongodb": "^6.17.0",
-    "mongoose": "^8.16.1",
-    "multer": "^2.0.1",
-    "patch-package": "^8.0.0",
+    "mammoth": "^1.7.2",
+    "mongoose": "^8.3.0",
+    "multer": "^1.4.5-lts.1",
     "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.0"
   }
 }
